@@ -1,0 +1,55 @@
+.Nav-Image-Container
+{
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  height: 20rem;
+  margin-left: calc(50% - 50vw);
+}
+
+.Nav-Image-Item-Container
+{
+  position: relative;
+  height: 100%;
+}
+
+.Nav-Image-Link
+{
+  display: inline-block;
+  height: 100%;
+  width: 30rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.Nav-Image
+{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.Nav-Image-Link .Nav-Image-Label
+{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);;
+  opacity: 0;
+
+  size: 5vmin;
+  width: 100%;
+  padding: 0.5vmin 0 1.5vmin 0;
+  text-align: center;
+  color: white;
+}
+
+.Nav-Image:hover + .Nav-Image-Label
+{
+  opacity: 1;
+}
