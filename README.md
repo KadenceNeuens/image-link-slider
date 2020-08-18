@@ -12,9 +12,9 @@ A simple image link slider component built for React. Uses react-router-dom for 
 ### Usage
 Where the slider is used, you can import a js array file with three fields: title, image, link
 
-title: Shown on hover on bottom label\
-image: Path to image to be displayed in this block\
-link: Path to link when clicking through
+**title**: Shown on hover on bottom label\
+**image**: Path to image to be displayed in this block\
+**link**: Path to link when clicking through
 
 then pass the file through props as 'data'
 
