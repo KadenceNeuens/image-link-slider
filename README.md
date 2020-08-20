@@ -1,13 +1,8 @@
 ## Image Link Slider
 
-Note: Still a work in progress...
-
-todo:
-- [ ] Clean up CSS
-- [ ] Add indicator to show slider is draggable
-- [ ] Change config on react-spring for fluidity
-
 A simple image link slider component built for React. Uses react-router-dom for links, react-use-gesture for drag gesture scrolling, and react-spring for animation. Easily re-style to fit different use cases.
+
+View it on github pages [here!](https://kadenceneuens.github.io/image-link-slider/)
 
 ### Usage
 Where the slider is used, you can import a js array file with three fields: title, image, link
