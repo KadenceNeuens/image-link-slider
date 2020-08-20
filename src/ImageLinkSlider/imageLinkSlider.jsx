@@ -1,8 +1,18 @@
+/*
+ * Image Link Slider
+ * by Kadence Neuens
+ * 
+ * Check my repo at https://github.com/KadenceNeuens/image-link-slider for more information and updates
+ * 
+ */
+
 import React from 'react';
 import './slider.css';
 import { useRef, useState, useEffect } from 'react';
 import { useSpring, useTrail, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
+
+import arrow from './arrow.png'
 
 import SliderItem from './sliderItem';
 
@@ -11,69 +21,108 @@ export default function ImageLinkSlider(props)
     // Get data from array file
     const sliderItems = props.data;
 
+    // Grab props
+    var sliderHeight = props.height;
+    var sliderWidth = props.width;
+
+    var springConfig = {
+        tension: 100,
+        friction: 15
+    }
+
+    // Default values
+    if (sliderHeight === undefined) sliderHeight = '20rem';
+    if (sliderWidth === undefined) sliderWidth = '30rem';
+
     // Ref for image component width
     const componentWidth = useRef(0);
 
+    // Ref for wrapper coordinates
+    const componentPos = useRef();
+
     // get width of all image items mapped
-    const getItemsWidth = () => {return (componentWidth.current.clientWidth * sliderItems.length)}
+    const getItemsWidth = () => {return (componentWidth.current.clientWidth * sliderItems.length)};
 
     // windowWidth state
-    const [winWidth, setWidth] = useState(window.innerWidth);
+    const [winWidth, setWinWidth] = useState(window.innerWidth);
 
     // windowWidth listener
     useEffect(() => {
-        window.addEventListener("resize", () => setWidth(window.innerWidth));
-        return () => window.removeEventListener("resize", () => setWidth(window.innerWidth));
+        window.addEventListener("resize", () => setWinWidth(window.innerWidth));
+        return () => window.removeEventListener("resize", () => setWinWidth(window.innerWidth));
     });
 
     // Calculate bounds for Carousel
     const [leftBound, setLeftBound] = useState(((sliderItems.length * componentWidth.current.clientWidth) - winWidth) * -1);
-    const updateLeftBound = () => { setLeftBound(((sliderItems.length * componentWidth.current.clientWidth) - winWidth) * -1)}
+    const updateLeftBound = () => { setLeftBound(((sliderItems.length * componentWidth.current.clientWidth) - winWidth) * -1)};
 
     // Ease in animation on mount
     const easeIn = useTrail(sliderItems.length, {
         from: {
-            transform: 'translate3d(1080px,0,0)'
+            transform: 'translate3d(100vw,0,0)'
         },
         to: {
             transform: 'translate3d(0,0,0)'
         }
-
-    })
+    });
 
     // Animation for drag
-    const [{ xy }, setLocation] = useSpring(() => ({ xy: [0 , 0] }))
+    const [{ x }, setLocation] = useSpring(() => ({ x: 0, config: springConfig }));
+
+    var testx;
 
     // bind dragging actions
-    const bindDraggable = useDrag(({ offset: [xy] }) =>
+    const bindDraggable = useDrag(({ offset: [x] }) =>
     {
         // Only allow dragging if items exceed window width
-        if ( getItemsWidth() > winWidth ) 
+        if ( getItemsWidth() > winWidth )
         {
-            setLocation({xy})
+            setLocation({x})
             updateLeftBound()
+            updateArrows();
         }
     },
     {
         bounds: {right: 0, left: leftBound},
         rubberband: true
     }
-    )
+    );
+
+    const [leftArrowToggle, setLeftArrowToggle] = useState( x.value < 0 );
+    const [rightArrowToggle, setRightArrowToggle] = useState( x.value > leftBound);
+    const updateArrows = () =>
+    {
+        setLeftArrowToggle(x.value < 0);
+        setRightArrowToggle(x.value > leftBound);
+    }
+
+    const leftArrowSpring = useSpring({opacity: leftArrowToggle ? 0.8 : 0});
+    const rightArrowSpring = useSpring({ opacity: rightArrowToggle ? 0.8 : 0 })
+
+    useEffect(() => {
+        updateLeftBound()
+        updateArrows()
+    },[])
 
     return (
-        <animated.div className="Nav-Image-Container" {...bindDraggable()} 
-        style={{
-            transform: xy.interpolate((x, y) => `translate3d(${x}px, 0, 0)`)
-        }}>
-            {
-                easeIn.map((item, index) =>
-                    (
-                        <animated.div ref={componentWidth} className="Nav-Image-Item-Container" key={index} style={item}>
-                            <SliderItem name={sliderItems[index].title} src={sliderItems[index].image} route={sliderItems[index].link}/>
-                        </animated.div>
+        <div className="Wrapper" style={{height: sliderHeight}}>
+            <animated.div ref={componentPos} className="Nav-Image-Container" {...bindDraggable()}
+            style={{
+                transform: x.interpolate((x) => `translateX(${x}px)`)
+            }}>
+                {
+                    easeIn.map((item, index) =>
+                        (
+                            <animated.div ref={componentWidth} className="Nav-Image-Item-Container" key={index} style={item}>
+                                <SliderItem name={sliderItems[index].title} src={sliderItems[index].image} route={sliderItems[index].link}
+                                style={{width: sliderWidth}}/>
+                            </animated.div>
+                        )
                     )
-                )
-            }
-        </animated.div>
+                }
+            </animated.div>
+            <div className="LeftArrow"><animated.div style={leftArrowSpring}><img src={arrow}/></animated.div></div>
+            <div className="RightArrow"><animated.div style={rightArrowSpring}><img src={arrow}/></animated.div></div>
+        </div>
     )
 }

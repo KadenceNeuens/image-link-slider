@@ -1,3 +1,15 @@
+.Wrapper
+{
+  position: relative;
+}
+
+.Nav-Image
+{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
 .Nav-Image-Container
 {
   position: relative;
@@ -6,8 +18,7 @@
   overflow-x: visible;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  height: 20rem;
-  margin-left: calc(50% - 50vw);
+  height: 100%;
 }
 
 .Nav-Image-Item-Container
@@ -18,19 +29,13 @@
 
 .Nav-Image-Link
 {
-  display: inline-block;
   height: 100%;
-  width: 30rem;
-  flex: 0 0 auto;
-  overflow: hidden;
-}
-
-.Nav-Image
-{
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
   width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
 }
 
 .Nav-Image-Link .Nav-Image-Label
@@ -44,7 +49,7 @@
 
   size: 5vmin;
   width: 100%;
-  padding: 0.5vmin 0 1.5vmin 0;
+  padding: 1.5vmin 0;
   text-align: center;
   color: white;
 }
@@ -52,4 +57,20 @@
 .Nav-Image:hover + .Nav-Image-Label
 {
   opacity: 1;
+}
+
+.LeftArrow
+{
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.RightArrow
+{
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
 }

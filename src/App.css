@@ -1,15 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
 .App {
   text-align: center;
+  overflow-x: hidden;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   font-size: calc(10px + 2vmin);
+  font-family: 'Source Sans Pro', sans-serif;
   color: white;
   overflow-x: hidden;
 }
@@ -18,7 +22,73 @@
   color: #61dafb;
 }
 
+h1
+{
+  margin: 0;
+}
+
+p
+{
+  margin: 1em 0;
+}
+
 .SliderContainer
 {
   align-items: center;
+}
+
+.ContentContainer
+{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.TagText
+{
+  flex-basis: 100%;
+}
+
+.TextBox
+{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 2rem;
+  background-color: #f0f0f0;
+  text-align: left;
+  width: 40%;
+  min-width: 15rem;
+}
+
+.CodeBox {
+  padding: 1rem;
+  margin: 2rem;
+  border:1px solid gray;
+  background-color:#f0f0f0;
+  width:40%;
+  text-align: left;
+  overflow:auto;    
+  padding:10px;
+}
+.CodeBox code {
+  font-family: Courier, sans-serif;
+  font-size: 1em;
+}
+
+.Footer
+{
+  min-height: 1rem;
+  background-color: #282c34;
+  padding: 1rem;
+  color: white;
+}
+
+ul
+{
+  list-style-type: none;
+  display: inline;
+  margin: 1em 0;
+  padding: 0;
 }
