@@ -6,7 +6,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #B4A96A;
+  background-image: linear-gradient(to bottom right, #B4A96A, #8E753D);
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -24,12 +25,13 @@
 
 h1
 {
+  text-shadow: 2px 2px #6A4E0D;
   margin: 0;
 }
 
 p
 {
-  margin: 1em 0;
+  margin: 2rem 0 0 0;
 }
 
 .SliderContainer
@@ -80,7 +82,7 @@ p
 .Footer
 {
   min-height: 1rem;
-  background-color: #282c34;
+  background-color: #6A4E0D;
   padding: 1rem;
   color: white;
 }
@@ -91,4 +93,10 @@ ul
   display: inline;
   margin: 1em 0;
   padding: 0;
+}
+
+a
+{
+  text-decoration: none;
+  color: #FFFCE8;
 }

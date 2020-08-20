@@ -15,6 +15,21 @@ return(
 </>
 )`;
 
+var codeText2 = String.raw
+`// You can also pass "none" through the easeIn and 
+// arrow props to remove the animation or arrow 
+// indicators. e.g.
+return(
+< >
+  // No staggered animation
+  <ImageLinkSlider data={sliderItems2} 
+    height="100vh" width="100vw" easeIn="none"/>
+  // No arrow indicators
+  <ImageLinkSlider data={sliderItems} 
+    height="12rem" width="12rem" arrow="none"/>
+</>
+)`;
+
   return (
     <div className="App">
 
@@ -32,7 +47,7 @@ return(
         </p>
 
         <div className="TextBox">
-          <span style={{width: 100 + "%"}}>Where the slider is used, you can import a js array file with three fields:</span>
+          <span style={{width: 100 + "%"}}>To use the slider, import a js array file with three fields:</span>
           <ul>
             <li><b>Title:</b> Shown on hover on bottom label (Leave blank for no label)</li>
             <li><b>Image:</b> Path to image to be displayed in this block</li>
@@ -49,8 +64,17 @@ return(
 
       </div>
 
-      <ImageLinkSlider data={sliderItems2} height="100vh" width="100vw"/>
+      <ImageLinkSlider data={sliderItems2} height="100vh" width="100vw" easeIn="none"/>
 
+      <div className="ContentContainer">
+        <div className="CodeBox">
+          <pre><code>{codeText2}</code></pre>
+        </div>
+        <div className="TextBox">
+          <ImageLinkSlider data={sliderItems} height="15rem" width="12rem" arrow="none"/>
+        </div>
+      </div>
+      
       <div className="Footer">
         Made by Kadence Neuens | <a href="https://github.com/KadenceNeuens/">Github</a>
       </div>

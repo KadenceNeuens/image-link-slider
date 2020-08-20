@@ -1,6 +1,13 @@
 .Wrapper
 {
+  height: 100%;
+  width: 100%;
+}
+
+.ArrowWrapper
+{
   position: relative;
+  overflow-x: hidden;
 }
 
 .Nav-Image

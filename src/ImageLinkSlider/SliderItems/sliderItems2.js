@@ -9,11 +9,6 @@ export const sliderItems = [
         image: "/images/8.jfif",
         link: "/Link8",
     },
-    {
-        title: "",
-        image: "/images/9.jfif",
-        link: "/Link9",
-    },
   ];
 
 export default 
