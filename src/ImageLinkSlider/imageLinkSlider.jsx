@@ -8,7 +8,7 @@
 
 import React from 'react';
 import './slider.css';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
 import { useSpring, useTrail, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 
@@ -37,9 +37,6 @@ export default function ImageLinkSlider(props)
     // Ref for image component width
     const componentWidth = useRef(0);
 
-    // Ref for wrapper coordinates
-    const componentPos = useRef();
-
     // get width of all image items mapped
     const getItemsWidth = () => {return (componentWidth.current.clientWidth * sliderItems.length)};
 
@@ -67,9 +64,7 @@ export default function ImageLinkSlider(props)
     });
 
     // Animation for drag
-    const [{ x }, setLocation] = useSpring(() => ({ x: 0, config: springConfig }));
-
-    var testx;
+    const [ { x }, setLocation] = useSpring(() => ({ x: 0, config: springConfig }));
 
     // bind dragging actions
     const bindDraggable = useDrag(({ offset: [x] }) =>
@@ -102,11 +97,11 @@ export default function ImageLinkSlider(props)
     useEffect(() => {
         updateLeftBound()
         updateArrows()
-    },[])
+    })
 
     return (
         <div className="Wrapper" style={{height: sliderHeight}}>
-            <animated.div ref={componentPos} className="Nav-Image-Container" {...bindDraggable()}
+            <animated.div className="Nav-Image-Container" {...bindDraggable()}
             style={{
                 transform: x.interpolate((x) => `translateX(${x}px)`)
             }}>
