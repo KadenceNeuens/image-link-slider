@@ -8,6 +8,7 @@
 {
   position: relative;
   overflow-x: hidden;
+  width: 100%;
 }
 
 .Nav-Image
@@ -59,6 +60,7 @@
   padding: 1.5vmin 0;
   text-align: center;
   color: white;
+  pointer-events: none;
 }
 
 .Nav-Image:hover + .Nav-Image-Label
@@ -72,6 +74,7 @@
   left: 1em;
   top: 50%;
   transform: translateY(-50%) scaleX(-1);
+  pointer-events: none;
 }
 
 .RightArrow
@@ -80,4 +83,5 @@
   right: 1em;
   top: 50%;
   transform: translateY(-50%);
+  pointer-events: none;
 }
